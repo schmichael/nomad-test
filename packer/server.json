@@ -1,0 +1,78 @@
+{
+	"variables": {
+		    "project_id": "{{env `GOOGLE_PROJECT_ID`}}",
+		    "ssh_private_key": "{{env `HOME`}}/.ssh/google_compute_engine",
+		    "consulbin": "{{env `HOME`}}/bin/consul",
+		    "nomadbin": "{{env `HOME`}}/bin/nomad",
+		    "vaultbin": "{{env `HOME`}}/bin/vault",
+		    "ssh_username": "debian"
+	},
+	"builders": [
+		{
+		    "type": "googlecompute",
+		    "project_id": "{{user `project_id`}}",
+		    "account_file": "../credentials.json",
+		    "zone": "us-west1-a",
+		    "source_image": "debian-8-jessie-v20161027",
+		    "image_name": "server-{{timestamp}}",
+		    "ssh_private_key_file": "{{user `ssh_private_key_file`}}",
+		    "ssh_username": "{{user `ssh_username`}}"
+		}
+	],
+	"provisioners": [
+		{
+			"type": "file",
+			"source": "{{user `consulbin`}}",
+			"destination": "/tmp/consul"
+		},
+		{
+			"type": "file",
+			"source": "../consul/dnsmasq.conf",
+			"destination": "/tmp/dnsmasq.conf"
+		},
+		{
+			"type": "file",
+			"source": "../consul/consul.service",
+			"destination": "/tmp/consul.service"
+		},
+		{
+			"type": "file",
+			"source": "../consul/consul.json",
+			"destination": "/tmp/consul.json"
+		},
+		{
+			"type": "file",
+			"source": "{{user `nomadbin`}}",
+			"destination": "/tmp/nomad"
+		},
+		{
+			"type": "file",
+			"source": "../nomad/nomad.service",
+			"destination": "/tmp/nomad.service"
+		},
+		{
+			"type": "file",
+			"source": "../nomad/nomad.hcl",
+			"destination": "/tmp/nomad.hcl"
+		},
+		{
+			"type": "file",
+			"source": "{{user `vaultbin`}}",
+			"destination": "/tmp/vault"
+		},
+		{
+			"type": "file",
+			"source": "../vault/vault.service",
+			"destination": "/tmp/vault.service"
+		},
+		{
+			"type": "file",
+			"source": "../vault/vault.hcl",
+			"destination": "/tmp/vault.hcl"
+		},
+		{
+			"type": "shell",
+			"script": "server-install.sh"
+		}
+	]
+}
