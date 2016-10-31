@@ -97,7 +97,7 @@ resource "google_compute_instance" "server" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get install -yqq dnsmasq",
+      "sudo apt-get install -yqq dnsmasq tmux",
     ]
   }
 }
@@ -160,7 +160,7 @@ resource "google_compute_instance" "z1client" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get install -yqq dnsmasq",
+      "sudo apt-get install -yqq dnsmasq tmux",
     ]
   }
 }
