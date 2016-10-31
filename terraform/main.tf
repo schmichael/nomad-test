@@ -69,31 +69,30 @@ resource "google_compute_instance" "server" {
     private_key = "${file("~/.ssh/google_compute_engine")}"
   }
 
-  # Consul
   provisioner "file" {
     source      = "../consul/consul.service"
-    destination = "/etc/systemd/system/consul.service"
+    destination = "/tmp/systemd-system-consul.service"
   }
 
   provisioner "file" {
-    source      = "../consul/consul.server.json"
-    destination = "/etc/consul.hcl"
+    source      = "../consul/consul.client.json"
+    destination = "/tmp/consul.hcl"
   }
 
   provisioner "file" {
     source      = "~/bin/consul"
-    destination = "/usr/local/bin/consul"
+    destination = "/tmp/consul"
   }
 
   provisioner "file" {
     source      = "../consul/dnsmasq.conf"
-    destination = "/etc/dnsmasq.d/10-consul"
+    destination = "/tmp/dnsmasq.d-10-consul"
   }
 
   # Nomad
   provisioner "file" {
-    source      = "~/bin/nomad"
-    destination = "/usr/local/bin/nomad"
+    source      = "~/go/bin/nomad"
+    destination = "/tmp/nomad"
   }
 
   provisioner "remote-exec" {
@@ -133,31 +132,30 @@ resource "google_compute_instance" "z1client" {
     private_key = "${file("~/.ssh/google_compute_engine")}"
   }
 
-  # Consul
   provisioner "file" {
     source      = "../consul/consul.service"
-    destination = "/etc/systemd/system/consul.service"
+    destination = "/tmp/systemd-system-consul.service"
   }
 
   provisioner "file" {
     source      = "../consul/consul.client.json"
-    destination = "/etc/consul.hcl"
+    destination = "/tmp/consul.hcl"
   }
 
   provisioner "file" {
     source      = "~/bin/consul"
-    destination = "/usr/local/bin/consul"
+    destination = "/tmp/consul"
   }
 
   provisioner "file" {
     source      = "../consul/dnsmasq.conf"
-    destination = "/etc/dnsmasq.d/10-consul"
+    destination = "/tmp/dnsmasq.d-10-consul"
   }
 
   # Nomad
   provisioner "file" {
-    source      = "~/bin/nomad"
-    destination = "/usr/local/bin/nomad"
+    source      = "~/go/bin/nomad"
+    destination = "/tmp/nomad"
   }
 
   provisioner "remote-exec" {
