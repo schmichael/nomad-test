@@ -36,7 +36,7 @@ provider "google" {
   region  = "${var.region1}"
   project = "calm-cairn-147722"
 
-  credentials = "${file("credentials.json")}"
+  credentials = "${file("../credentials.json")}"
 }
 
 ## SERVERS
