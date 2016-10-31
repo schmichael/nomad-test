@@ -22,12 +22,12 @@ variable "image" {
 
 variable "public_key_path" {
   type    = "string"
-  default = "~/.ssh/google_compute_engine"
+  default = "~/.ssh/google_compute_engine.pub"
 }
 
 variable "user" {
   type    = "string"
-  default = "root"
+  default = "debian"
 }
 
 ## PROVIDER
