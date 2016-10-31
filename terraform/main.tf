@@ -71,12 +71,12 @@ resource "google_compute_instance" "server" {
 
   # Consul
   provisioner "file" {
-    source      = "consul/consul.service"
+    source      = "../consul/consul.service"
     destination = "/etc/systemd/system/consul.service"
   }
 
   provisioner "file" {
-    source      = "consul/consul.server.json"
+    source      = "../consul/consul.server.json"
     destination = "/etc/consul.hcl"
   }
 
@@ -86,7 +86,7 @@ resource "google_compute_instance" "server" {
   }
 
   provisioner "file" {
-    source      = "consul/dnsmasq.conf"
+    source      = "../consul/dnsmasq.conf"
     destination = "/etc/dnsmasq.d/10-consul"
   }
 
@@ -135,12 +135,12 @@ resource "google_compute_instance" "z1client" {
 
   # Consul
   provisioner "file" {
-    source      = "consul/consul.service"
+    source      = "../consul/consul.service"
     destination = "/etc/systemd/system/consul.service"
   }
 
   provisioner "file" {
-    source      = "consul/consul.client.json"
+    source      = "../consul/consul.client.json"
     destination = "/etc/consul.hcl"
   }
 
@@ -150,7 +150,7 @@ resource "google_compute_instance" "z1client" {
   }
 
   provisioner "file" {
-    source      = "consul/dnsmasq.conf"
+    source      = "../consul/dnsmasq.conf"
     destination = "/etc/dnsmasq.d/10-consul"
   }
 
