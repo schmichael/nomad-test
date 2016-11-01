@@ -70,34 +70,13 @@ resource "google_compute_instance" "server" {
   }
 
   provisioner "file" {
-    source      = "../consul/consul.service"
-    destination = "/tmp/systemd-system-consul.service"
-  }
-
-  provisioner "file" {
-    source      = "../consul/consul.client.json"
-    destination = "/tmp/consul.hcl"
-  }
-
-  provisioner "file" {
-    source      = "~/bin/consul"
-    destination = "/tmp/consul"
-  }
-
-  provisioner "file" {
     source      = "../consul/dnsmasq.conf"
     destination = "/tmp/dnsmasq.d-10-consul"
   }
 
-  # Nomad
-  provisioner "file" {
-    source      = "~/go/bin/nomad"
-    destination = "/tmp/nomad"
-  }
-
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get install -yqq dnsmasq tmux",
+      "sudo apt-get install -yqq dnsmasq tmux rsync",
     ]
   }
 }
@@ -133,34 +112,13 @@ resource "google_compute_instance" "z1client" {
   }
 
   provisioner "file" {
-    source      = "../consul/consul.service"
-    destination = "/tmp/systemd-system-consul.service"
-  }
-
-  provisioner "file" {
-    source      = "../consul/consul.client.json"
-    destination = "/tmp/consul.hcl"
-  }
-
-  provisioner "file" {
-    source      = "~/bin/consul"
-    destination = "/tmp/consul"
-  }
-
-  provisioner "file" {
     source      = "../consul/dnsmasq.conf"
     destination = "/tmp/dnsmasq.d-10-consul"
   }
 
-  # Nomad
-  provisioner "file" {
-    source      = "~/go/bin/nomad"
-    destination = "/tmp/nomad"
-  }
-
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get install -yqq dnsmasq tmux",
+      "sudo apt-get install -yqq dnsmasq tmux rsync",
     ]
   }
 }
