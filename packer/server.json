@@ -3,7 +3,7 @@
 		    "project_id": "{{env `GOOGLE_PROJECT_ID`}}",
 		    "ssh_private_key": "{{env `HOME`}}/.ssh/google_compute_engine",
 		    "consulbin": "{{env `HOME`}}/bin/consul",
-		    "nomadbin": "{{env `HOME`}}/bin/nomad",
+		    "nomadbin": "{{env `GOPATH`}}/bin/nomad",
 		    "vaultbin": "{{env `HOME`}}/bin/vault",
 		    "ssh_username": "debian"
 	},
@@ -73,6 +73,10 @@
 		{
 			"type": "shell",
 			"script": "server-install.sh"
+		},
+		{
+			"type": "shell",
+			"inline": "sudo apt-get install -yqq dnsmasq tmux rsync bash-completion"
 		}
 	]
 }
