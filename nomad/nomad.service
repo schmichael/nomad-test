@@ -7,6 +7,7 @@ After=network-online.target
 Restart=on-failure
 ExecStart=/usr/local/bin/nomad agent -config=/etc/nomad.hcl
 KillSignal=SIGINT
+MemoryLimit=1G
 
 [Install]
 WantedBy=multi-user.target

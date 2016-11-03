@@ -8,6 +8,7 @@ Restart=on-failure
 ExecStart=/usr/local/bin/consul agent -config-file=/etc/consul.json
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
+MemoryLimit=1G
 
 [Install]
 WantedBy=multi-user.target
